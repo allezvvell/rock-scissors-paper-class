@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 
 export default class Box extends Component {
-    constructor(props){
-        super(props);        
-    }
   render() {
     let result = this.props.result;
     if(this.props.title === 'Computer' && this.props.result !== 'tie' && this.props.result !== ''){

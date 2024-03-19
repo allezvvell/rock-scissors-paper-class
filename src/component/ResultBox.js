@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 
 export default class ResultBox extends Component {
-    constructor(props){
-      super(props);        
-    }
   render() {
     let sentence = '';
     if(this.props.result === 'tie'){
