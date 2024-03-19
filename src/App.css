@@ -1,38 +1,66 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.wrapper {
+  position:  relative;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.box-wrap {
+  display:  flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.box-wrap > div {
+  margin: 5px;
+  width: 500px;
+  height: 500px;
+  text-align: center;
+  border: 4px solid black;
+  border-radius: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.box-wrap > div.win {
+  border-color: green;
+}
+.box-wrap > div.lose {
+  border-color: red;
+}
+
+
+.box-wrap > div .img-box img {
+ width: 80%;
+}
+
+
+.button-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-400px);
+}
+
+.button-wrap button {
+  display: inline-block;
+  margin: 5px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50% 50%;
+  cursor: pointer;
+  font-size: 25px;
+  transition: all 0.2s;
+}
+
+.button-wrap button:hover {
+  background-color: #31364c;
+  color: #fff;
+}
+
+.result-box {
+  position:  absolute;
+  left: 50%;
+  top : 50%;
+  transform: translate(-50%,-300px);
 }
