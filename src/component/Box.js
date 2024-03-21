@@ -13,7 +13,7 @@ export default class Box extends Component {
     return (
     <div className={result}>
         <h1 className='title'>{this.props.title}</h1>
-        <span className='img-box'><img src={this.props.item && this.props.item.img} alt='가위바위보 이미지'/></span>
+        <span className='img-box'>{this.props.item &&<img src={this.props.item.img} alt='가위바위보 이미지'/>}</span>
         <h2 className='result'>{result}</h2>
      </div>
     )

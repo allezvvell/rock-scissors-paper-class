@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './App.css';
 import Box from './component/Box';
-import ResultBox from './component/ResultBox';
+import Score from './component/Score';
+import Thumb from './component/Thumb';
 
 
 
@@ -30,7 +31,9 @@ export default class App extends Component {
     this.state = {
       userSelect: null,
       computerSelect: null,
-      result: ''
+      result: '',
+      userScore: 0,
+      computerScore: 0
     }
   }
   play = (userChoice) => {
@@ -47,26 +50,77 @@ export default class App extends Component {
     if(user.name === computer.name){
         return 'tie'
     }else if(user.name === ROCK){
-      return computer.name === SCISSORS ? 'win' : 'lose';
+      if(computer.name === SCISSORS){
+        this.setState({userScore:this.state.userScore + 1});
+        return 'win'
+      }else{
+        this.setState({computerScore:this.state.computerScore + 1});
+        return 'lose'
+      }
     }else if(user.name === PAPER){
-      return computer.name === ROCK ? 'win' : 'lose';
+      if(computer.name === ROCK){
+        this.setState({userScore:this.state.userScore + 1});
+        return 'win'
+      }else{
+        this.setState({computerScore:this.state.computerScore + 1});
+        return 'lose'
+      }
     }else if(user.name === SCISSORS){
-      return computer.name === PAPER ? 'win' : 'lose';
+      if(computer.name === PAPER){
+        this.setState({userScore:this.state.userScore + 1});
+        return 'win'
+      }else{
+        this.setState({computerScore:this.state.computerScore + 1});
+        return 'lose'
+      }
+    }
+  }
+  gameStart = (e) => {
+    e.target.classList.add('hide');
+    e.target.nextSibling.classList.remove('hide');
+    document.querySelector('.score-wrap').classList.remove('hide');
+  }
+  shareUrl = () => {
+    if (navigator.share) {
+        navigator.share({
+            title: '가위바위보 게임',
+            url: 'https://rock-scissors-papper-allezvvell.netlify.app',
+        });
+    }else{
+        alert("공유하기가 지원되지 않는 환경 입니다.")
     }
   }
   render() {
     return (
       <div className='wrapper'>
+        <div className='score-wrap hide'>
+          <p className='game-title'>ROCK SCISSORS PAPER!</p>
+          <div className='score-container'>
+            <Score title='You' score={this.state.userScore}/>
+            <Score title='Computer' score={this.state.computerScore}/>
+          </div>
+        </div>
         <div className='box-wrap'>
           <Box title='You' item={this.state.userSelect} result={this.state.result}/>
           <Box title='Computer'item={this.state.computerSelect} result={this.state.result}/>
         </div>
         <div className='button-wrap'>
-          <button className='scissors' onClick={() => this.play('scissors')}>가위</button>
-          <button className='rock' onClick={() => this.play('rock')}>바위</button>
-          <button className='paper' onClick={() => this.play('paper')}>보</button>
+          <button className='start-btn' onClick={(e) => this.gameStart(e)}>GAME START</button>
+          <div className='button-container hide'>
+            <button className='scissors' onClick={() => this.play('scissors')}>가위</button>
+            <button className='rock' onClick={() => this.play('rock')}>바위</button>
+            <button className='paper' onClick={() => this.play('paper')}>보</button>
+          </div>
         </div>
-        <ResultBox result={this.state.result}/>
+        <div className='thumbs-wrap'>
+          <Thumb title='you' result={this.state.result}/>
+          <Thumb title='computer' result={this.state.result}/>
+        </div>
+        <div className='header-btn-wrap'>
+          <button className='restart-btn' onClick={() => {window.location.reload()}}>Restart</button>
+          <button className='share-btn' onClick={() => this.shareUrl()}>Share</button>
+        </div>
+        <div className='cover'>반응형 작업중 입니다!</div>
       </div>
     )
   }
